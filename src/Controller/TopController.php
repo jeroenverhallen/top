@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -14,20 +13,6 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TopController extends Controller
 {
-    /** @var EntityManager */
-    private $em;
-
-
-    /**
-     * Constructor
-     *
-     * @param EntityManager $entityManager
-     */
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->em = $entityManager;
-    }
-
     public function fizzBuzz(): Response
     {
         $array = [];
