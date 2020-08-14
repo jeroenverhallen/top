@@ -48,10 +48,8 @@ class TopController extends Controller
         if (! is_array($array)) {
             throw new BadRequestHttpException('Variabele moet een array zijn');
         }
-        dump($array);
         foreach ($array as $subArray) {
             $rotated = [];
-            dump($subArray);
             if (! is_array($subArray)) {
                 throw new BadRequestHttpException('De array moet uit arrays bestaan');
             } else if (count($array) != count($subArray)) {
@@ -73,7 +71,6 @@ class TopController extends Controller
                 throw new BadRequestHttpException('kies draairichting links of rechts');
             }
         }
-        dump(count($array), $rotated);
 
         return $this->render('assignments/four.html.twig', [
             'array' => $rotated,
