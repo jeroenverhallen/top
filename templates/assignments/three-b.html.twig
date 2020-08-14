@@ -6,21 +6,8 @@
     </head>
     <body>
         {% block body %}
-            <h>Vul hieronder je gebruikersnaam in om een nieuw wachtwoord aan te vragen</h></br>
-            <input id="username" placeholder="gebruikersnaam">
-            <input type="submit" value="verstuur" id="submit">
+            Er zou nu een mail moeten worden gestuurd naar {{ email }} met wachtwoord {{ newPass }}
         {% endblock %}
         {% block javascripts %}{% endblock %}
-        <script type="text/javascript">
-          var button = document.getElementById('submit');
-          button.addEventListener(
-            'click',
-            function() {
-                username = document.getElementById('username');
-                console.log(username.value);
-                window.location.replace("/3/" + username.value);
-            }
-          );
-        </script>
     </body>
 </html>

@@ -2,6 +2,8 @@
 // src/Controller/FizzBuzzController.php
 namespace App\Controller;
 
+use App\Entity\User;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -12,6 +14,20 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TopController extends Controller
 {
+    /** @var EntityManager */
+    private $em;
+
+
+    /**
+     * Constructor
+     *
+     * @param EntityManager $entityManager
+     */
+    public function __construct(EntityManager $entityManager)
+    {
+        $this->em = $entityManager;
+    }
+
     public function fizzBuzz(): Response
     {
         $array = [];
@@ -44,8 +60,22 @@ class TopController extends Controller
 
     public function resetPassword($username): Response
     {
-        dump($username);die;
-        return $this->render('assignments/three-b.html.twig');
+        $repository = $this->getDoctrine()->getRepository(User::class);
+        $user = $repository->findOneBy(['username' => $username]);
+        if ( !isset($user)) {
+            throw new BadRequestHttpException('geen gebruiker bekend met die naam');
+        } else {
+            $email = $user->getEmail();
+            $newPass = $this->randomPassword();
+        }
+        $hash = password_hash('wachtwoord', PASSWORD_DEFAULT);
+        $user->setPassword($hash);
+        #TODO $user moet nog opgeslagen worden
+
+        return $this->render('assignments/three-b.html.twig', [
+            'email' => $email,
+            'newPass' => $newPass
+        ]);
     }
 
     public function rotate($direction, $array): Response
@@ -81,5 +111,17 @@ class TopController extends Controller
         return $this->render('assignments/four.html.twig', [
             'array' => $rotated,
         ]);
+    }
+
+    private function randomPassword($length = 8) {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $count = mb_strlen($chars);
+
+        for ($i = 0, $result = ''; $i < $length; $i++) {
+            $index = rand(0, $count - 1);
+            $result .= mb_substr($chars, $index, 1);
+        }
+
+        return $result;
     }
 }
