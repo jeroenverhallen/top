@@ -1,3 +1,19 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+app_fizz_buzz:
+    path: /1
+    controller: App\Controller\TopController::fizzBuzz
+
+app_reverse:
+    path: /2
+    controller: App\Controller\TopController::reverse
+
+app_password:
+    path: /3
+    controller: App\Controller\TopController::password
+
+app_rotate:
+    path: /4/{array}
+    controller: App\Controller\TopController::rotate

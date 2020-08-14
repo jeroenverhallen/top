@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Twee{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        {% block body %}
+            <input id="reverse" name="reverse" placeholder="Vul hier iets in">
+            <input type="submit" value="omdraaien" id="submit_reverse">
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+        <script type="text/javascript">
+          var button = document.getElementById('submit_reverse');
+          button.addEventListener(
+            'click',
+            function() {
+                input = document.getElementById('reverse');
+                reverseString = input.value.split("").reverse().join("");
+                console.log(input.value, reverseString)
+                input.value = reverseString;
+            }
+          );
+        </script>
+    </body>
+</html>
