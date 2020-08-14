@@ -42,17 +42,41 @@ class TopController extends Controller
         return $this->render('assignments/three.html.twig');
     }
 
-    public function rotate($array): Response
+    public function rotate($direction, $array): Response
     {
         $array = json_decode($array);
         if (! is_array($array)) {
             throw new BadRequestHttpException('Variabele moet een array zijn');
         }
-
-        dump(count($array));die;
+        dump($array);
+        foreach ($array as $subArray) {
+            $rotated = [];
+            dump($subArray);
+            if (! is_array($subArray)) {
+                throw new BadRequestHttpException('De array moet uit arrays bestaan');
+            } else if (count($array) != count($subArray)) {
+                throw new BadRequestHttpException('Het aantal elementen per array moet even groot zijn als het aantal arrays');
+            }
+            if ($direction == 'links') {
+                for ($i=0; $i <count($array); $i++) {
+                    for ($j=0; $j <count($array); $j++) {
+                        $rotated[$i][$j] = $array[$j][count($array) -1 - $i];
+                    }
+                }
+            } else if ($direction == 'rechts') {
+                for ($i=0; $i <count($array); $i++) {
+                    for ($j=0; $j <count($array); $j++) {
+                        $rotated[$i][$j] = $array[count($array) -1 - $j][$i];
+                    }
+                }
+            } else {
+                throw new BadRequestHttpException('kies draairichting links of rechts');
+            }
+        }
+        dump(count($array), $rotated);
 
         return $this->render('assignments/four.html.twig', [
-            'array' => $array,
+            'array' => $rotated,
         ]);
     }
 }

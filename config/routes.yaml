@@ -15,5 +15,5 @@ app_password:
     controller: App\Controller\TopController::password
 
 app_rotate:
-    path: /4/{array}
+    path: /4/{direction}/{array}
     controller: App\Controller\TopController::rotate
