@@ -14,6 +14,10 @@ app_password:
     path: /3
     controller: App\Controller\TopController::password
 
+app_password_reset:
+    path: /3/{username}
+    controller: App\Controller\TopController::resetPassword
+
 app_rotate:
     path: /4/{direction}/{array}
     controller: App\Controller\TopController::rotate

@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Een{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
     </head>
     <body>
         {% block body %}
@@ -11,6 +10,5 @@
                 <li>{{ number }}</li>
             {% endfor %}
         {% endblock %}
-        {% block javascripts %}{% endblock %}
     </body>
 </html>

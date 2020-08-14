@@ -12,16 +12,15 @@
         {% endblock %}
         {% block javascripts %}{% endblock %}
         <script type="text/javascript">
-          var button = document.getElementById('submit_reverse');
-          button.addEventListener(
-            'click',
-            function() {
-                input = document.getElementById('reverse');
-                reverseString = input.value.split("").reverse().join("");
-                console.log(input.value, reverseString)
-                input.value = reverseString;
-            }
-          );
+            var button = document.getElementById('submit_reverse');
+            button.addEventListener(
+                'click',
+                function() {
+                    input = document.getElementById('reverse');
+                    reverseString = input.value.split("").reverse().join("");
+                    input.value = reverseString;
+                }
+            );
         </script>
     </body>
 </html>

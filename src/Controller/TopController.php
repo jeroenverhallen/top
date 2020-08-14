@@ -42,6 +42,12 @@ class TopController extends Controller
         return $this->render('assignments/three.html.twig');
     }
 
+    public function resetPassword($username): Response
+    {
+        dump($username);die;
+        return $this->render('assignments/three-b.html.twig');
+    }
+
     public function rotate($direction, $array): Response
     {
         $array = json_decode($array);
